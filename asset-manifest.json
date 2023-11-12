@@ -1,10 +1,13 @@
 {
   "files": {
+    "main.css": "/serveandpass/static/css/main.9e73b050.css",
     "main.js": "/serveandpass/static/js/main.1b78d8bd.js",
     "index.html": "/serveandpass/index.html",
+    "main.9e73b050.css.map": "/serveandpass/static/css/main.9e73b050.css.map",
     "main.1b78d8bd.js.map": "/serveandpass/static/js/main.1b78d8bd.js.map"
   },
   "entrypoints": [
+    "static/css/main.9e73b050.css",
     "static/js/main.1b78d8bd.js"
   ]
 }
