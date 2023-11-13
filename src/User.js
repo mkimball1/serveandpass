@@ -3,10 +3,10 @@ import Session from './Session';
 
 function User(){
     const [username, setUsername] = useState()
-    let sessions = [new Session(), new Session()]
-    // sessions[0].incrementPass(3)
+    // let sessions = []
+    let sessions = [new Session(new Date().toLocaleDateString()), new Session(new Date().toLocaleDateString()), new Session("11/14/2023")]
     function addSession(newSession){
-        sessions.append(newSession)
+        sessions.push(newSession)
     }
     return {username, setUsername, sessions, addSession}
 }

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Session from './Session';
 import User from './User';
 import Legend from './Legend';
+import LineChart from "./Graph";
 
 function App() {
   const [show_legend, updateLegend] = useState(false);
   const [username, setUsername] = useState("");
   const currUser = new User();
-  const currSession = new Session();
-
+  const currSession = new Session("123");
+  
   function updateUsername(event) {
     setUsername(event.target.value);
   }
@@ -17,6 +18,13 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault();
     currUser.setUsername(username)
+    // Delete later
+    currUser.sessions[0].incrementPass(3)
+    currUser.sessions[0].incrementPass(3)
+    currUser.sessions[1].incrementPass(2)
+    currUser.sessions[1].incrementPass(1)
+    currUser.sessions[2].incrementPass(1)
+    console.log(currUser.sessions) 
   }
   
 
@@ -51,15 +59,17 @@ function App() {
             {show_legend ? <Legend/> : null}
           </div>
 
-          <button> Save Session </button>
 
           <button onClick={() => {
             console.log(currUser)
-            console.log(currSession) }}> 
-            log curr user & session 
+            console.log(currSession) 
+            }}> 
+            log curr user and session
           </button>
 
-          
+          <div>
+            <LineChart sessionsList={currUser.sessions}/>
+          </div>
         </div>
 
       : null}

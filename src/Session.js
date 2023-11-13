@@ -1,12 +1,12 @@
 import { useState } from "react";
-function Session() {
+function Session(curr_date) {
+    const [date, setDate] = useState(curr_date)
     const [passes, setPasses] = useState({
         "3": 0,
         "2": 0,
         "1": 0,
         "0": 0,
       })
-    
       const [count, setCount] = useState(0)
       const [average, setAverage] = useState(0)
     
@@ -27,6 +27,6 @@ function Session() {
           return updatedPasses;
         });
       }
-      return {passes, setPasses, count, setCount, average, setAverage, incrementPass}
+      return {passes, setPasses, count, setCount, average, setAverage, incrementPass, date, setDate}
 }
 export default Session;
