@@ -1,5 +1,5 @@
 /* This will only style <button> elements within the '.button_container' class */
-.button_container button {
+.buttonContainer button {
     padding: 50px;
     margin: 20px;
     font-size: 20px;
@@ -11,6 +11,6 @@
 }
 
 /* Add styles for the hover state */
-.button_container button:hover {
+.buttonContainer button:hover {
     background-color: #45a049; /* Darker green background */
 }
