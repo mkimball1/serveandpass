@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Session from './Session';
 import User from './User';
 import Legend from './Legend';
-import LineChart from "./Graph";
+import Graph from "./Graph";
 
 function App() {
   const [show_legend, updateLegend] = useState(false);
@@ -16,11 +16,11 @@ function App() {
   }
 
   //currUser functions
-  const updateUsername = (newUsername) => {
-    const updatedUser = new User(newUsername);
-    updatedUser.sessions = [...currUser.sessions];
-    setCurrUser(updatedUser);
-  };
+  // const updateUsername = (newUsername) => {
+  //   const updatedUser = new User(newUsername);
+  //   updatedUser.sessions = [...currUser.sessions];
+  //   setCurrUser(updatedUser);
+  // };
 
   const addSessionToUser = (newSession) => {
     const updatedUser = new User(currUser.username);
@@ -41,12 +41,19 @@ function App() {
     setCurrSession(updatedSession)
   }
 
-  function initUserAndSession(event) {
+  function initAll(event) {
     event.preventDefault();
 
     //Will have to change later to database
     setCurrUser(new User(username))
     setCurrSession(new Session(new Date().toLocaleDateString()))
+
+    // setGraph(currUser.sessions)
+    // let s1 = new Session("1")
+    // let s2 = new Session("2")
+    // let s3 = new Session("3")
+    // setGraph([s1,s2,s3])
+
   }
   
   function logcurruser(){
@@ -64,11 +71,14 @@ function App() {
     // updateUsername("HELLO")
     // addSessionToUser(new Session("xyz"))
     // incrementPass(3)
+    // const updatedUser = new User(currUser.username);
+    // updatedUser.sessions = [...currUser.sessions, new Session("xyz"), new Session("abc"), new Session("wer")];
+    // setCurrUser(updatedUser)
   }
 
   return(
     <div>
-      <form onSubmit={initUserAndSession}>
+      <form onSubmit={initAll}>
         <input type="text" value={username} onChange={updateInputUsername} placeholder="User Id"/>
         <button type="submit">Submit</button>
       </form>
@@ -100,7 +110,7 @@ function App() {
             {show_legend ? <Legend/> : null}
           </div>
 
-          
+
           <button onClick={logcurruser}> log curr user</button>
           <button onClick={logcurrsession}> log curr session</button>
           <button onClick={test}> test button</button>
@@ -108,10 +118,10 @@ function App() {
           {/* <div>
             <LineChart sessionsList={currUser.sessions}/>
           </div> */}
+
+          {/* <Graph data={currUser.sessions}/> */}
+          <Graph my_data={currUser.sessions}/>
         </div>
-        
-        
-        
       :null}
     </div>
     
