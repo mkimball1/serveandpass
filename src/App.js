@@ -8,43 +8,81 @@ import LineChart from "./Graph";
 function App() {
   const [show_legend, updateLegend] = useState(false);
   const [username, setUsername] = useState("");
-  const currUser = new User();
-  const currSession = new Session("123");
+  const [currUser, setCurrUser] = useState();
+  const [currSession, setCurrSession] = useState();
   
-  function updateUsername(event) {
+  function updateInputUsername(event) {
     setUsername(event.target.value);
   }
 
-  function handleSubmit(event) {
+  //currUser functions
+  const updateUsername = (newUsername) => {
+    const updatedUser = new User(newUsername);
+    updatedUser.sessions = [...currUser.sessions];
+    setCurrUser(updatedUser);
+  };
+
+  const addSessionToUser = (newSession) => {
+    const updatedUser = new User(currUser.username);
+    updatedUser.sessions = [...currUser.sessions, newSession];
+    setCurrUser(updatedUser);
+  };
+
+  //currSession functions
+  const incrementPass = (passKey) => {
+    const updatedSession = { ...currSession };
+    updatedSession.passes = {
+        ...currSession.passes,
+        [passKey]: currSession.passes[passKey] + 1,
+    };
+    updatedSession.total += passKey;
+    updatedSession.count += 1;
+    updatedSession.average = (updatedSession.total / updatedSession.count);
+    setCurrSession(updatedSession)
+  }
+
+  function initUserAndSession(event) {
     event.preventDefault();
-    currUser.setUsername(username)
-    // Delete later
-    currUser.sessions[0].incrementPass(3)
-    currUser.sessions[0].incrementPass(3)
-    currUser.sessions[1].incrementPass(2)
-    currUser.sessions[1].incrementPass(1)
-    currUser.sessions[2].incrementPass(1)
-    console.log(currUser.sessions) 
+
+    //Will have to change later to database
+    setCurrUser(new User(username))
+    setCurrSession(new Session(new Date().toLocaleDateString()))
   }
   
+  function logcurruser(){
+    console.log(currUser.username)
+    console.log(currUser.sessions)
+  }
+  function logcurrsession(){
+    console.log(currSession.date)
+    console.log(currSession.passes)
+    console.log(currSession.count)
+    console.log(currSession.total)
+    console.log(currSession.average)
+  }
+  function test(){
+    // updateUsername("HELLO")
+    // addSessionToUser(new Session("xyz"))
+    // incrementPass(3)
+  }
 
   return(
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={username} onChange={updateUsername} placeholder="User Id"/>
+      <form onSubmit={initUserAndSession}>
+        <input type="text" value={username} onChange={updateInputUsername} placeholder="User Id"/>
         <button type="submit">Submit</button>
       </form>
 
-      {currUser.username ? 
-        <div> 
+      {currUser? 
+        
+        <div>
           <p> Current User: {currUser.username}</p> 
           <div className="buttonContainer">
-            <button onClick={() => currSession.incrementPass(3)}> 3 </button>
-            <button onClick={() => currSession.incrementPass(2)}> 2 </button>
-            <button onClick={() => currSession.incrementPass(1)}> 1 </button>
-            <button onClick={() => currSession.incrementPass(0)}> 0 </button>
+            <button onClick={() => incrementPass(3)}> 3 </button>
+            <button onClick={() => incrementPass(2)}> 2 </button>
+            <button onClick={() => incrementPass(1)}> 1 </button>
+            <button onClick={() => incrementPass(0)}> 0 </button>
           </div>
-        
           <div className="currSessionStats">
               <p> 3: {currSession.passes["3"]}</p>
               <p> 2: {currSession.passes["2"]}</p>
@@ -53,26 +91,28 @@ function App() {
               <p> Current Session Average: {currSession.average.toFixed(2)}</p>
               <p> Current Session Total Passes: {currSession.count} </p>
           </div>
-        
+          <button onClick={() => {
+            addSessionToUser(currSession)
+            setCurrSession(new Session(new Date().toLocaleDateString()))
+            }}> Submit Session </button>
           <div className="legend">
             <button onClick={() => updateLegend(!show_legend)}> Show Legend </button>
             {show_legend ? <Legend/> : null}
           </div>
 
-
-          <button onClick={() => {
-            console.log(currUser)
-            console.log(currSession) 
-            }}> 
-            log curr user and session
-          </button>
-
-          <div>
+          
+          <button onClick={logcurruser}> log curr user</button>
+          <button onClick={logcurrsession}> log curr session</button>
+          <button onClick={test}> test button</button>
+          
+          {/* <div>
             <LineChart sessionsList={currUser.sessions}/>
-          </div>
+          </div> */}
         </div>
-
-      : null}
+        
+        
+        
+      :null}
     </div>
     
   );

@@ -1,32 +1,13 @@
-import { useState } from "react";
 function Session(curr_date) {
-    const [date, setDate] = useState(curr_date)
-    const [passes, setPasses] = useState({
-        "3": 0,
-        "2": 0,
-        "1": 0,
-        "0": 0,
-      })
-      const [count, setCount] = useState(0)
-      const [average, setAverage] = useState(0)
-    
-      function incrementPass(passKey) {
-        setPasses((currentPasses) => {
-          const updatedPasses = {
-            ...currentPasses,
-            [passKey]: currentPasses[passKey] + 1,
-          };
-          let total = 0;
-          let new_count = 0;
-          for (const key in updatedPasses) {
-            total += updatedPasses[key] * parseInt(key, 10);
-            new_count += updatedPasses[key];
+    this.date = curr_date
+    this.passes = {
+            "3": 0,
+            "2": 0,
+            "1": 0,
+            "0": 0,
           }
-          setAverage(total / new_count);
-          setCount(new_count)
-          return updatedPasses;
-        });
-      }
-      return {passes, setPasses, count, setCount, average, setAverage, incrementPass, date, setDate}
+    this.count = 0
+    this.total = 0
+    this.average = 0
 }
 export default Session;
