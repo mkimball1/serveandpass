@@ -18,17 +18,6 @@ app.get('/getUsers', (req, res) => {
     .catch(err => res.json(err))
 })
 
-// app.put('/getUserByName/:username', (req, res) => {
-//     const username = req.params.username; // Extract the username from the request parameters
-//     UserModel.findOne({ username: username }) // Use the extracted username to query the database
-//         .then(user => {
-//             if (!user) {
-//                 return res.status(404).send('User not found');
-//             }
-//             res.json(user);
-//         })
-//         .catch(err => res.status(500).json(err));
-// });
 app.put('/getUserByName/:username', (req, res) => {
     const username = req.params.username; // Extract the username from the request parameters
     const updateData = req.body; // This will contain the data you want to update
