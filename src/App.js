@@ -15,20 +15,12 @@ function App() {
     setUsername(event.target.value);
   }
 
-  //currUser functions
-  // const updateUsername = (newUsername) => {
-  //   const updatedUser = new User(newUsername);
-  //   updatedUser.sessions = [...currUser.sessions];
-  //   setCurrUser(updatedUser);
-  // };
-
   const addSessionToUser = (newSession) => {
     const updatedUser = new User(currUser.username);
     updatedUser.sessions = [...currUser.sessions, newSession];
     setCurrUser(updatedUser);
   };
 
-  //currSession functions
   const incrementPass = (passKey) => {
     const updatedSession = { ...currSession };
     updatedSession.passes = {
@@ -47,13 +39,6 @@ function App() {
     //Will have to change later to database
     setCurrUser(new User(username))
     setCurrSession(new Session(new Date().toLocaleDateString()))
-
-    // setGraph(currUser.sessions)
-    // let s1 = new Session("1")
-    // let s2 = new Session("2")
-    // let s3 = new Session("3")
-    // setGraph([s1,s2,s3])
-
   }
   
   function logcurruser(){
@@ -68,12 +53,7 @@ function App() {
     console.log(currSession.average)
   }
   function test(){
-    // updateUsername("HELLO")
-    // addSessionToUser(new Session("xyz"))
-    // incrementPass(3)
-    // const updatedUser = new User(currUser.username);
-    // updatedUser.sessions = [...currUser.sessions, new Session("xyz"), new Session("abc"), new Session("wer")];
-    // setCurrUser(updatedUser)
+    //lol
   }
 
   return(
@@ -92,6 +72,7 @@ function App() {
             <button onClick={() => incrementPass(2)}> 2 </button>
             <button onClick={() => incrementPass(1)}> 1 </button>
             <button onClick={() => incrementPass(0)}> 0 </button>
+            <button onClick={() => setCurrSession(new Session(new Date().toLocaleDateString()))}> Clear </button>
           </div>
           <div className="currSessionStats">
               <p> 3: {currSession.passes["3"]}</p>
@@ -115,11 +96,6 @@ function App() {
           <button onClick={logcurrsession}> log curr session</button>
           <button onClick={test}> test button</button>
           
-          {/* <div>
-            <LineChart sessionsList={currUser.sessions}/>
-          </div> */}
-
-          {/* <Graph data={currUser.sessions}/> */}
           <Graph my_data={currUser.sessions}/>
         </div>
       :null}

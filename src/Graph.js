@@ -29,7 +29,13 @@ function Graph(my_data) {
                 beforeBody: function(context) {
                   // This will be displayed before the body section of the tooltip
                   const pointIndex = context[0].dataIndex;
-                  return `${'Sample Size of: ' + my_data[pointIndex].count}`;
+                  return `${
+                    'Sample Size of: ' + my_data[pointIndex].count + '\n' +
+                    '3: ' + my_data[pointIndex].passes['3'] + '\n' +
+                    '2: ' + my_data[pointIndex].passes['2'] + '\n' +
+                    '1: ' + my_data[pointIndex].passes['1'] + '\n' +
+                    '0: ' + my_data[pointIndex].passes['0']
+                  }`;
                 }
               }
             }
