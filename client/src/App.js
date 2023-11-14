@@ -15,6 +15,7 @@ function App() {
 
   const [listUsers, setlistUsers] = useState([])
   const [sessions, setSessions] = useState()
+
   function createUser(){
     axios.post("http://localhost:3001/createUser", {username, sessions})
     .then((response) => {
@@ -22,6 +23,25 @@ function App() {
       console.log('user created')
     })
   }
+
+  const addSessionToUser = (newSessionList) => {
+    // TODO
+    const updatedUser = new User(currUser.username);
+    updatedUser.sessions = [...currUser.sessions, newSessionList];
+
+    const dataToUpdate = {
+      sessions: updatedUser.sessions
+    }
+
+    console.log(dataToUpdate)
+    axios.put('http://localhost:3001/getUserByName/'+username, dataToUpdate)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err))
+
+    setCurrUser(updatedUser);
+  };
 
   useEffect(() => {
     axios.get('http://localhost:3001/getUsers')
@@ -34,12 +54,6 @@ function App() {
   function updateInputUsername(event) {
     setUsername(event.target.value);
   }
-
-  const addSessionToUser = (newSession) => {
-    const updatedUser = new User(currUser.username);
-    updatedUser.sessions = [...currUser.sessions, newSession];
-    setCurrUser(updatedUser);
-  };
 
   const incrementPass = (passKey) => {
     const updatedSession = { ...currSession };
@@ -66,24 +80,12 @@ function App() {
     setCurrSession(new Session(new Date().toLocaleDateString()));
   }
   
-  
-
-  function test2(){
-    console.log(currUser)
-    console.log(listUsers)
-  }
-
-  
   function logcurruser(){
     console.log(currUser.username)
     console.log(currUser.sessions)
   }
   function logcurrsession(){
-    // console.log(currSession.date)
-    // console.log(currSession.passes)
-    // console.log(currSession.count)
-    // console.log(currSession.total)
-    // console.log(currSession.average)
+    console.log(currSession)
   }
   function test(){
     //lol
@@ -97,7 +99,6 @@ function App() {
       </form>
 
       {currUser? 
-        
         <div>
           <p> Current User: {currUser.username}</p> 
           <div className="buttonContainer">
@@ -115,10 +116,15 @@ function App() {
               <p> Current Session Average: {currSession.average.toFixed(2)}</p>
               <p> Current Session Total Passes: {currSession.count} </p>
           </div>
+          {/* TODO */}
           <button onClick={() => {
+            //update DB
             addSessionToUser(currSession)
+            //RESET Current Session
             setCurrSession(new Session(new Date().toLocaleDateString()))
             }}> Submit Session </button>
+
+
           <div className="legend">
             <button onClick={() => updateLegend(!show_legend)}> Show Legend </button>
             {show_legend ? <Legend/> : null}

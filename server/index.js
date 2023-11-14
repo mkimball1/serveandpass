@@ -17,6 +17,40 @@ app.get('/getUsers', (req, res) => {
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
+
+// app.put('/getUserByName/:username', (req, res) => {
+//     const username = req.params.username; // Extract the username from the request parameters
+//     UserModel.findOne({ username: username }) // Use the extracted username to query the database
+//         .then(user => {
+//             if (!user) {
+//                 return res.status(404).send('User not found');
+//             }
+//             res.json(user);
+//         })
+//         .catch(err => res.status(500).json(err));
+// });
+app.put('/getUserByName/:username', (req, res) => {
+    const username = req.params.username; // Extract the username from the request parameters
+    const updateData = req.body; // This will contain the data you want to update
+
+    UserModel.findOneAndUpdate(
+        { username: username }, // Filter to find the user
+        updateData, // Data for updating the user
+        { new: true } // Option to return the updated document
+    )
+    .then(updatedUser => {
+        if (!updatedUser) {
+            return res.status(404).send('User not found');
+        }
+        res.json(updatedUser); // Send back the updated user data
+    })
+    .catch(err => res.status(500).json(err));
+});
+
+
+
+
+
 app.post("/createUser", async (req, res) => {
     const user = req.body
     const newUser = new UserModel(user)
