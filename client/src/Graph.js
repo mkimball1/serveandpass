@@ -4,7 +4,7 @@ import {Chart as chartjs} from 'chart.js/auto';
 
 function Graph(my_data) {
     my_data = my_data['my_data']
-    console.log(my_data)
+    // console.log(my_data)
     let labels = my_data.map(i => i.date);
     let passdata = my_data.map(i => i.average);
 

@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Session from './Session';
 import User from './User';
 import Legend from './Legend';
 import Graph from "./Graph";
+import axios from 'axios'
 
 function App() {
   const [show_legend, updateLegend] = useState(false);
   const [username, setUsername] = useState("");
+  
   const [currUser, setCurrUser] = useState();
   const [currSession, setCurrSession] = useState();
+
+  const [listUsers, setlistUsers] = useState([])
+  const [sessions, setSessions] = useState()
+  function createUser(){
+    axios.post("http://localhost:3001/createUser", {username, sessions})
+    .then((response) => {
+      setlistUsers([...listUsers, {username, sessions}])
+      console.log('user created')
+    })
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/getUsers')
+    .then((response) => { setlistUsers(response.data)
+    })
+  }, [])
+
+
   
   function updateInputUsername(event) {
     setUsername(event.target.value);
@@ -35,22 +55,35 @@ function App() {
 
   function initAll(event) {
     event.preventDefault();
-
-    //Will have to change later to database
-    setCurrUser(new User(username))
-    setCurrSession(new Session(new Date().toLocaleDateString()))
+    setCurrUser(null);
+    const foundUser = listUsers.find(user => user['username'] === username);
+    if (foundUser) {
+      setCurrUser(foundUser);
+    } else {
+      setCurrUser(new User(username));
+      createUser()
+    }
+    setCurrSession(new Session(new Date().toLocaleDateString()));
   }
+  
+  
+
+  function test2(){
+    console.log(currUser)
+    console.log(listUsers)
+  }
+
   
   function logcurruser(){
     console.log(currUser.username)
     console.log(currUser.sessions)
   }
   function logcurrsession(){
-    console.log(currSession.date)
-    console.log(currSession.passes)
-    console.log(currSession.count)
-    console.log(currSession.total)
-    console.log(currSession.average)
+    // console.log(currSession.date)
+    // console.log(currSession.passes)
+    // console.log(currSession.count)
+    // console.log(currSession.total)
+    // console.log(currSession.average)
   }
   function test(){
     //lol
