@@ -81,10 +81,14 @@ function App() {
     setCurrUser(null);
     const foundUser = listUsers.find(user => user['username'] === username);
     if (foundUser) {
-      toast("Loading User: " + username)
+      toast("Loading User: " + username, {
+        position: toast.POSITION.BOTTOM_CENTER
+      })
       setCurrUser(foundUser);
     } else {
-      toast("Creating New User: " + username)
+      toast("Creating New User: " + username, {
+        position: toast.POSITION.BOTTOM_CENTER
+      })
       setCurrUser(new User(username));
       createUser()
     }
@@ -93,8 +97,7 @@ function App() {
 
   return(
     <div>
-      <ToastContainer />
-      <form onSubmit={initAll}>
+      <form className="inputcontainer" onSubmit={initAll}>
         <input 
           type="text" 
           value={username} 
@@ -108,15 +111,15 @@ function App() {
         />
         <button type="submit">Submit</button>
       </form>
+
+
       {currUser? 
         <div>
-          <p> Current User: {currUser.username}</p> 
           <div className="buttonContainer">
             <button onClick={() => incrementPass(3)}> 3 </button>
             <button onClick={() => incrementPass(2)}> 2 </button>
             <button onClick={() => incrementPass(1)}> 1 </button>
             <button onClick={() => incrementPass(0)}> 0 </button>
-            <button onClick={() => setCurrSession(new Session(new Date().toLocaleDateString()))}> Clear </button>
           </div>
           <div className="currSessionStats">
               <p> 3: {currSession.passes["3"]}</p>
@@ -125,23 +128,28 @@ function App() {
               <p> 0: {currSession.passes["0"]}</p>
               <p> Current Session Average: {currSession.average.toFixed(2)}</p>
               <p> Current Session Total Passes: {currSession.count} </p>
+              <div className='updateButtonsContainer'> 
+                <button className="submit" onClick={() => {
+                  addSessionToUser(currSession)
+                  setCurrSession(new Session(new Date().toLocaleDateString()))
+                  }}> Submit Session </button>
+                <button className="clear" onClick={() => setCurrSession(new Session(new Date().toLocaleDateString()))}> Clear </button>
+              </div>
           </div>
-          {/* TODO */}
-          <button onClick={() => {
-            //update DB
-            addSessionToUser(currSession)
-            //RESET Current Session
-            setCurrSession(new Session(new Date().toLocaleDateString()))
-            }}> Submit Session </button>
+
+          
+          
 
 
-          <div className="legend">
+          {/* <div className="legend">
             <button onClick={() => updateLegend(!show_legend)}> Show Legend </button>
             {show_legend ? <Legend/> : null}
-          </div>
+          </div> */}
+
           <Graph my_data={currUser.sessions}/>
         </div>
       :null}
+      <ToastContainer />
     </div>
     
   );
