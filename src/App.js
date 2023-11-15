@@ -132,7 +132,7 @@ function App() {
                 <button className="submit" onClick={() => {
                   addSessionToUser(currSession)
                   setCurrSession(new Session(new Date().toLocaleDateString()))
-                  }}> Submit Session </button>
+                  }}> Submit </button>
                 <button className="clear" onClick={() => setCurrSession(new Session(new Date().toLocaleDateString()))}> Clear </button>
               </div>
           </div>

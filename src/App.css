@@ -2,7 +2,8 @@
 .inputcontainer {
     /* border: 1px solid black; */
     display: flex;
-    margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
     width: 85vw;
     height: 6vh;
