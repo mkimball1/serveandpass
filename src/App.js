@@ -17,8 +17,6 @@ function App() {
   const [currSession, setCurrSession] = useState();
   const [listUsers, setlistUsers] = useState([])
 
-  // const notify = () => toast("Wow so easy!");
-
   function createUser(){
     const data = {
       "username": username,
@@ -49,6 +47,7 @@ function App() {
   };
 
   useEffect(() => {
+    console.log("Update ListUsers")
     axios.get('https://us-east-1.aws.data.mongodb-api.com/app/serveandpass-wkoqd/endpoint/getUsers')
         .then((response) => {
             setlistUsers(response.data)
@@ -57,7 +56,7 @@ function App() {
         .catch(error => {
             console.error('Error fetching data:', error);
         });
-  }, [])
+  }, [currUser, ])
 
 
   
@@ -96,10 +95,19 @@ function App() {
     <div>
       <ToastContainer />
       <form onSubmit={initAll}>
-        <input type="text" value={username} onChange={updateInputUsername} placeholder="User Id"/>
+        <input 
+          type="text" 
+          value={username} 
+          onChange={updateInputUsername} 
+          placeholder="User Id"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+            }
+          }}
+        />
         <button type="submit">Submit</button>
       </form>
-
       {currUser? 
         <div>
           <p> Current User: {currUser.username}</p> 
