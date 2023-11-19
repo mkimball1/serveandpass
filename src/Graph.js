@@ -1,6 +1,7 @@
 // Import the Line element from the react-chartjs-2 package, which is a React wrapper for Chart.js
 import {Line} from 'react-chartjs-2';
 import {Chart as chartjs} from 'chart.js/auto';
+import './App.css';
 
 function Graph(my_data) {
     my_data = my_data['my_data']
@@ -42,10 +43,10 @@ function Graph(my_data) {
           },
         scales: {
             y: {
-                min: 0,
+                min: 1,
                 max: 3,
                 ticks: {
-                    stepSize: 0.05
+                    stepSize: 0.10
                 }
             }
         },
@@ -55,7 +56,7 @@ function Graph(my_data) {
     };
 
     // Return the Line element with the data and options as props
-    return <div style={{ height: '90vh', width: '90vw' }}>
+    return <div className='mygraph'>
         <Line data={data} options={options} />
     </div>;
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Session from './Session';
 import User from './User';
-import Legend from './Legend';
 import Graph from "./Graph";
 import axios from 'axios'
 
@@ -115,37 +114,29 @@ function App() {
 
       {currUser? 
         <div>
-          <div className="buttonContainer">
-            <button onClick={() => incrementPass(3)}> 3 </button>
-            <button onClick={() => incrementPass(2)}> 2 </button>
-            <button onClick={() => incrementPass(1)}> 1 </button>
-            <button onClick={() => incrementPass(0)}> 0 </button>
+          <div className='container'>
+            <div className="buttonContainer">
+              <button onClick={() => incrementPass(3)}> 3 </button>
+              <button onClick={() => incrementPass(2)}> 2 </button>
+              <button onClick={() => incrementPass(1)}> 1 </button>
+              <button onClick={() => incrementPass(0)}> 0 </button>
+            </div>
+            <div className="currSessionStats">
+                <p> 3: {currSession.passes["3"]}</p>
+                <p> 2: {currSession.passes["2"]}</p>
+                <p> 1: {currSession.passes["1"]}</p>
+                <p> 0: {currSession.passes["0"]}</p>
+                <p> Current Session Average: {currSession.average.toFixed(2)}</p>
+                <p> Current Session Total Passes: {currSession.count} </p>
+                <div className='updateButtonsContainer'> 
+                  <button className="submit" onClick={() => {
+                    addSessionToUser(currSession)
+                    setCurrSession(new Session(new Date().toLocaleDateString()))
+                    }}> Submit </button>
+                  <button className="clear" onClick={() => setCurrSession(new Session(new Date().toLocaleDateString()))}> Clear </button>
+                </div>
+            </div>
           </div>
-          <div className="currSessionStats">
-              <p> 3: {currSession.passes["3"]}</p>
-              <p> 2: {currSession.passes["2"]}</p>
-              <p> 1: {currSession.passes["1"]}</p>
-              <p> 0: {currSession.passes["0"]}</p>
-              <p> Current Session Average: {currSession.average.toFixed(2)}</p>
-              <p> Current Session Total Passes: {currSession.count} </p>
-              <div className='updateButtonsContainer'> 
-                <button className="submit" onClick={() => {
-                  addSessionToUser(currSession)
-                  setCurrSession(new Session(new Date().toLocaleDateString()))
-                  }}> Submit </button>
-                <button className="clear" onClick={() => setCurrSession(new Session(new Date().toLocaleDateString()))}> Clear </button>
-              </div>
-          </div>
-
-          
-          
-
-
-          {/* <div className="legend">
-            <button onClick={() => updateLegend(!show_legend)}> Show Legend </button>
-            {show_legend ? <Legend/> : null}
-          </div> */}
-
           <Graph my_data={currUser.sessions}/>
         </div>
       :null}
