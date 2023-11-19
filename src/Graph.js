@@ -43,7 +43,7 @@ function Graph(my_data) {
           },
         scales: {
             y: {
-                min: 1,
+                min: 0,
                 max: 3,
                 ticks: {
                     stepSize: 0.10
