@@ -1,7 +1,8 @@
 class User{
-  constructor(name){
+  constructor(name, currSession){
     this.username = name
     this.sessions = []
+    this.currentSession = currSession
   }
 }
   

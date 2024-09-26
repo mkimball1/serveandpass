@@ -38,16 +38,16 @@ body {
     width: 85vw;
     height: 10vh;
     padding-top: 2vh;
-    /* margin: auto; */
+    margin: auto;
     margin-top: 5vh;
     /* border: 1px solid black; */
 
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .buttonContainer button {
-    width: 23%;
-    height: 90%;
+    width: 10%;
+    height: 75%;
     margin: auto;   
     font-size: 120%;
     background-color: #457B9D; /* Green background */

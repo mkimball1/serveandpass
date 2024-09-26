@@ -9,5 +9,6 @@ function Session(curr_date) {
     this.count = 0
     this.total = 0
     this.average = 0
+    this.passArray = []
 }
 export default Session;
