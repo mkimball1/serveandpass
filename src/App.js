@@ -3,7 +3,6 @@ import './App.css';
 import Session from './Session';
 import User from './User';
 import Graph from "./Graph";
-import StatCard from './StatCard';
 import axios from 'axios'
 
 
@@ -11,19 +10,20 @@ import { ToastContainer, toast, useToast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [show_legend, updateLegend] = useState(false);
   const [username, setUsername] = useState("");
   
   //current users
   const [listCurrUsers, setlistCurrUsers] = useState([]);
 
   //all users from DB
-  const [listUsers, setlistUsers] = useState([])
+  const [listUsers, setlistUsers] = useState([
+  ])
 
-  function createUser(){
+  function createUser(NS){
     const data = {
       "username": username,
-      "sessions": []
+      "sessions": [],
+      "currentSession": NS
     }
     axios.post('https://us-east-1.aws.data.mongodb-api.com/app/serveandpass-wkoqd/endpoint/createUser', data)
       .then(response => {
@@ -34,32 +34,34 @@ function App() {
       });
   }
 
-  // const addSessionToUser = (newSessionList) => {
-  //   const updatedUser = new User(currUser.username);
-  //   updatedUser.sessions = [...currUser.sessions, newSessionList];
+  const addSessionToUser = (user) => {
+    const updatedUser = new User(user.username);
+    updatedUser.sessions = [...user.sessions, user.currentSession];
+    updatedUser.currentSession = new Session(new Date().toLocaleDateString());
+  
+    axios.put("https://us-east-1.aws.data.mongodb-api.com/app/serveandpass-wkoqd/endpoint/editUser?username="+updatedUser.username, updatedUser)
+        .then(response => {
+          console.log('Response:', response.data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+  
+    return updatedUser; // Return the updated user
+  };
+  
 
-  //   console.log("updatedUser:", updatedUser)
-  //   axios.put("https://us-east-1.aws.data.mongodb-api.com/app/serveandpass-wkoqd/endpoint/editUser?username="+updatedUser.username, updatedUser)
-  //       .then(response => {
-  //         console.log('Response:', response.data);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error:', error);
-  //       });
-  //   setCurrUser(updatedUser);
-  // };
-
-  // useEffect(() => {
-  //   console.log("Update ListUsers")
-  //   axios.get('https://us-east-1.aws.data.mongodb-api.com/app/serveandpass-wkoqd/endpoint/getUsers')
-  //       .then((response) => {
-  //           setlistUsers(response.data)
-  //           console.log('Data retrieved:', response.data);
-  //       })
-  //       .catch(error => {
-  //           console.error('Error fetching data:', error);
-  //       });
-  // }, [listCurrUsers, ])
+  useEffect(() => {
+    console.log("Update ListUsers")
+    axios.get('https://us-east-1.aws.data.mongodb-api.com/app/serveandpass-wkoqd/endpoint/getUsers')
+        .then((response) => {
+            setlistUsers(response.data)
+            console.log('Data retrieved:', response.data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+  }, [listCurrUsers, ])
 
 
   
@@ -115,16 +117,7 @@ function App() {
   function initAll(event) {
     event.preventDefault();
     const foundUser = listUsers.find(user => user['username'] === username);
-    for (let i = 0; i < listCurrUsers.length; i++) {
-      const user = listCurrUsers[i];
-      console.log(user.username + "/" + username);
-      if (user.username === username) {
-        // or if username already exists in entire database
-        console.log("ERR");
-        return;
-      }
-    }
-
+  
     if (foundUser) {
       toast("Loading User: " + username, {
         position: toast.POSITION.BOTTOM_CENTER
@@ -134,93 +127,143 @@ function App() {
       toast("Creating New User: " + username, {
         position: toast.POSITION.BOTTOM_CENTER
       })
-      setlistCurrUsers([...listCurrUsers, new User(username, new Session(new Date().toLocaleDateString()))]);
-      createUser()
+      let NS = new Session(new Date().toLocaleDateString())
+      setlistCurrUsers([...listCurrUsers, new User(username, NS)]);
+      createUser(NS)
     }
     setUsername('');
-    console.log(listCurrUsers);
+    // console.log(listCurrUsers);
   }
 
-  function findtotal(user, key){
+  function findtotalobject(user){
+    let total = {
+      3: 0,
+      2: 0,
+      1: 0,
+      0: 0
+    };
+    for (let i = 0; i < user.sessions.length; i++) {
+      for(let j = 0; j < 4; j++){
+        total[j] += user.sessions[i].passes[j];
+      }
+      
+    }
+    return total
+  }
+  
+  function findtotal(user){
     let total = 0;
     for (let i = 0; i < user.sessions.length; i++) {
-      total += user.sessions[i].passes[key]
+      total += user.sessions[i].total
     }
     return total
   }
 
+  function findcount(user){
+    let total = 0;
+    for (let i = 0; i < user.sessions.length; i++) {
+      total += user.sessions[i].count
+    }
+    return total
+  }
+  
   return(
-    <div>
-      <div>
-        <form className="inputcontainer" onSubmit={initAll}>
-          <input 
-            type="text" 
-            value={username} 
-            onChange={updateInputUsername} 
-            placeholder="New User ID"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-              }
-            }}
-          />
-          <button type="submit"> Add User </button>
-        </form>
-      </div>
-
-      <div>
-        {listCurrUsers.map((user, index) => {
-          return (
-            <div className='container'>
-              <div className="buttonContainer">
-                <h1> {user.username} </h1>
-                <button onClick={() => incrementPass(user, 3)}> 3 </button>
-                <button onClick={() => incrementPass(user, 2)}> 2 </button>
-                <button onClick={() => incrementPass(user, 1)}> 1 </button>
-                <button onClick={() => incrementPass(user, 0)}> 0 </button>
-                <button onClick={() => deincrementPass(user)}> Undo </button>
-              </div>
-            </div>
-          )
-        })}
-        {/* <button> Submit All Sessions </button> */}
-      </div>
-
-      <h1> STATS </h1>
-      <div>
-        {listCurrUsers.map((user, index) => {
-          let t = {
-            3: findtotal(user, 3),
-            2: findtotal(user, 2),
-            1: findtotal(user, 1),
-            0: findtotal(user, 0)
+    <div className="container">
+  <div className="form-container">
+    <form className="input-container" onSubmit={initAll}>
+      <input 
+        type="text" 
+        value={username} 
+        onChange={updateInputUsername} 
+        placeholder="New User ID"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
           }
-          let to = (t[3] + t[2] + t[1] + t[0])
-          return (
-            <div>
-              <h2> {user.username} </h2>
-              <h3> Current Session </h3>
-                <p> 3: {user.currentSession.passes[3]} </p>
-                <p> 2: {user.currentSession.passes[2]} </p>
-                <p> 1: {user.currentSession.passes[1]} </p>
-                <p> 0: {user.currentSession.passes[0]}</p>
-                <p> Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.count}</p>
-              {/* <h3> Lifetime </h3>
-                <p> 3: { t[3] + user.currentSession.passes[3]} </p>
-                <p> 2: { t[2] + user.currentSession.passes[2]} </p>
-                <p> 1: { t[1] + user.currentSession.passes[1]} </p>
-                <p> 0: { t[0] + user.currentSession.passes[0]} </p>
-                <p> Average: {((to/4) + user.currentSession.average).toFixed(2)} Total Passes: {to + user.currentSession.total} </p> */}
-                {/* <Graph my_data={currUser.sessions}/> */}
-            </div>
-          )
-        })}
-      </div>
+        }}
+        className="input-field"
+      />
+      <button type="submit" className="submit-button">Add User</button>
+    </form>
+  </div>
 
-    </div>
+  <div className="user-list">
+    {listCurrUsers.map((user, index) => {
+      return (
+        <div className="user-container" key={index}>
+          <h1 className="user-title">{user.username}</h1>
+          <div className="button-container">
+            {[3, 2, 1, 0].map((value) => (
+              <button key={value} className="score-button" onClick={() => incrementPass(user, value)}>{value}</button>
+            ))}
+          </div>
+          <div className="undo-container">
+            <button className="undo-button" onClick={() => deincrementPass(user)}>Undo</button>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  
     
+    {listCurrUsers.length !== 0? 
+    <div className="stats-container">
+      <button className="submit-all-button" onClick={() => {
+          const updatedUsers = listCurrUsers.map(user => addSessionToUser(user)); // Get updated users
+          setlistCurrUsers(updatedUsers); // Update state with new list
+        }}>
+          Submit All
+        </button>
+      <h1 className="stats-title">STATS</h1>
+
+      {listCurrUsers.map((user, index) => {
+      let tt = findtotalobject(user);
+
+      let t = findtotal(user)
+      let c = findcount(user)
+      return (
+        <div className="stats-user" key={index}>
+          <h2>{user.username}</h2>
+          <div className="stats-sections">
+            {/* Current Session Section */}
+            <div className="stats-section">
+              <h3>Current Session</h3>
+              <p>3: {user.currentSession.passes[3]}</p>
+              <p>2: {user.currentSession.passes[2]}</p>
+              <p>1: {user.currentSession.passes[1]}</p>
+              <p>0: {user.currentSession.passes[0]}</p>
+              <p>
+                Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.count}
+              </p>
+            </div>
+            {/* Lifetime Section */}
+            <div className="stats-section">
+              <h3>Lifetime</h3>
+              <p>3: {tt[3]}</p>
+              <p>2: {tt[2]}</p>
+              <p>1: {tt[1]}</p>
+              <p>0: {tt[0]}</p>
+              <p>
+                Average: {(t/c).toFixed(2)} Total Passes: {c}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      );
+    })}
+
+    </div> 
+    
+    
+    : <> </>}
+    
+  </div>
     
   );
 }
 
+                
+                {/* <Graph my_data={currUser.sessions}/> */}
 export default App;
