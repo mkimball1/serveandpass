@@ -204,7 +204,7 @@ function App() {
                 <p> 2: {user.currentSession.passes[2]} </p>
                 <p> 1: {user.currentSession.passes[1]} </p>
                 <p> 0: {user.currentSession.passes[0]}</p>
-                <p> Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.total}</p>
+                <p> Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.count}</p>
               {/* <h3> Lifetime </h3>
                 <p> 3: { t[3] + user.currentSession.passes[3]} </p>
                 <p> 2: { t[2] + user.currentSession.passes[2]} </p>
