@@ -4,10 +4,36 @@ import {Chart as chartjs} from 'chart.js/auto';
 import './App.css';
 
 function Graph(my_data) {
+  // function findtotalobject(user){
+  //   let total = {
+  //     3: 0,
+  //     2: 0,
+  //     1: 0,
+  //     0: 0
+  //   };
+  //   for (let i = 0; i < user.length; i++) {
+  //     for(let j = 0; j < 4; j++){
+  //       total[j] += user[i].passes[j];
+  //     }
+      
+  //   }
+  //   return total
+  // }
+
+    
     my_data = my_data['my_data']
     // console.log(my_data)
-    let labels = my_data.map(i => i.date);
+    let labels = my_data.map(i => i.date.slice(0,4));
     let passdata = my_data.map(i => i.average);
+
+    const calculateAverage = (arr) => {
+      const total = arr.reduce((acc, num) => acc + num, 0);
+      return total / arr.length;
+    };
+
+    
+    let average = Array(passdata.length).fill(calculateAverage(passdata));
+    let averagelabels = average.map(i => 'Lifetime Average');
 
     const data = {
         labels: labels,
@@ -15,9 +41,17 @@ function Graph(my_data) {
             {
                 label: 'Session Passing Average',
                 fill: true,
-                backgroundColor: 'rgba(75,192,192,0.4)',
+                backgroundColor: 'rgba(75,192,192,0.6)',
                 borderColor: 'rgba(75,192,192,1)',
                 data: passdata
+            },
+            {
+              label: 'Lifetime Passing Average',
+              fill: true,
+              borderDash: [5, 5],
+              backgroundColor: 'rgba(232, 28, 31, 0.4)',
+              borderColor: 'rgba(232, 28, 31, 0.7)',
+              data: average,  // The array of averages
             },
         ],
     };
