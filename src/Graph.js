@@ -3,26 +3,8 @@ import {Line} from 'react-chartjs-2';
 import {Chart as chartjs} from 'chart.js/auto';
 import './App.css';
 
-function Graph(my_data) {
-  // function findtotalobject(user){
-  //   let total = {
-  //     3: 0,
-  //     2: 0,
-  //     1: 0,
-  //     0: 0
-  //   };
-  //   for (let i = 0; i < user.length; i++) {
-  //     for(let j = 0; j < 4; j++){
-  //       total[j] += user[i].passes[j];
-  //     }
-      
-  //   }
-  //   return total
-  // }
-
-    
+function Graph(my_data) {    
     my_data = my_data['my_data']
-    // console.log(my_data)
     let labels = my_data.map(i => i.date.slice(0,4));
     let passdata = my_data.map(i => i.average);
 

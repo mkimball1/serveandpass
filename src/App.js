@@ -251,7 +251,6 @@ function App() {
             <Graph my_data={user.sessions}/>
           </div>
         </div>
-
       );
     })}
 

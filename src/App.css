@@ -51,8 +51,8 @@
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 10px;
-    width: 250px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
     text-align: center; /* Center content */
   }
   
@@ -128,30 +128,52 @@
     margin-top: 40px;
   }
   
-  .stats-container {
-    margin-top: 20px;
-  }
+  /* Container styling */
+.stats-container {
+  width: 100%; /* Make sure the container is responsive */
+  max-width: 1200px; /* Optional max width for larger screens */
+  margin: 0 auto;
+  /* padding: 10px; */
+  /* border: 1px solid #ccc; */
+}
 
-  /* Stats User Card */
+/* Ensure stats-user div is responsive */
 .stats-user {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-  }
+  width: 100%; /* Use full width */
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  /* margin: auto; */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Make the graph container responsive */
+.mygraph {
+  width: 100%; /* Make sure graph takes up full width of parent */
+  max-width: 100%; /* Ensure it doesn’t exceed the parent container */
+  overflow: hidden; /* Prevent the graph from overflowing */
+}
   
   /* Container for both sections */
   .stats-sections {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    gap: 20px; /* Adds spacing between the sections */
   }
   
-  /* Individual sections */
+  /* Flex properties for the sections */
   .stats-section {
-    flex: 1;
-    margin: 0 10px;
+    flex: 1 1 calc(50% - 10px); /* Take 50% width minus spacing */
+    min-width: 200px; /* Ensures it doesn't shrink too much */
+  }
+  
+  /* Graph container takes full width */
+  .mygraph {
+    flex: 1 1 100%; /* The graph will take full width in mobile layout */
+    height: 25vh;
+    margin-top: 20px; /* Add space between graph and sections */
   }
   
   /* Optional: Center the headings */
@@ -163,7 +185,7 @@
   .stats-section p {
     margin: 5px 0;
   }
-  
+
 
   
   
