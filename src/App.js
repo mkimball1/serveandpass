@@ -248,6 +248,7 @@ function App() {
                 Average: {(t/c).toFixed(2)} Total Passes: {c}
               </p>
             </div>
+            <Graph my_data={user.sessions}/>
           </div>
         </div>
 
@@ -265,5 +266,5 @@ function App() {
 }
 
                 
-                {/* <Graph my_data={currUser.sessions}/> */}
+                
 export default App;
