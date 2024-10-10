@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [username, setUsername] = useState("");
+  const [isVisible, setIsVisible] = useState(false); // State to toggle visibility
   
   //current users
   const [listCurrUsers, setlistCurrUsers] = useState([]);
@@ -18,6 +19,10 @@ function App() {
   //all users from DB
   const [listUsers, setlistUsers] = useState([
   ])
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible); // Toggle the state
+  };
 
   function createUser(NS){
     const data = {
@@ -140,16 +145,23 @@ function App() {
       3: 0,
       2: 0,
       1: 0,
+      '0.5': 0,  // Use '0.5' as a string
       0: 0
     };
+    
+    // Iterate through each session
     for (let i = 0; i < user.sessions.length; i++) {
-      for(let j = 0; j < 4; j++){
+      for(let j = 0; j <= 3; j++){
         total[j] += user.sessions[i].passes[j];
       }
-      
+      // Handle 0.5 separately
+      total['0.5'] += user.sessions[i].passes[0.5];  // Use 0.5 key correctly
     }
-    return total
-  }
+    
+    return total;
+}
+
+
   
   function findtotal(user){
     let total = 0;
@@ -193,7 +205,7 @@ function App() {
         <div className="user-container" key={index}>
           <h1 className="user-title">{user.username}</h1>
           <div className="button-container">
-            {[3, 2, 1, 0].map((value) => (
+            {[3, 2, 1, 0.5, 0].map((value) => (
               <button key={value} className="score-button" onClick={() => incrementPass(user, value)}>{value}</button>
             ))}
           </div>
@@ -215,44 +227,66 @@ function App() {
         }}>
           Submit All
         </button>
-      <h1 className="stats-title">STATS</h1>
-
-      {listCurrUsers.map((user, index) => {
-      let tt = findtotalobject(user);
-
-      let t = findtotal(user)
-      let c = findcount(user)
-      return (
-        <div className="stats-user" key={index}>
-          <h2>{user.username}</h2>
-          <div className="stats-sections">
-            {/* Current Session Section */}
-            <div className="stats-section">
-              <h3>Current Session</h3>
-              <p>3: {user.currentSession.passes[3]}</p>
-              <p>2: {user.currentSession.passes[2]}</p>
-              <p>1: {user.currentSession.passes[1]}</p>
-              <p>0: {user.currentSession.passes[0]}</p>
-              <p>
-                Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.count}
-              </p>
-            </div>
-            {/* Lifetime Section */}
-            <div className="stats-section">
-              <h3>Lifetime</h3>
-              <p>3: {tt[3]}</p>
-              <p>2: {tt[2]}</p>
-              <p>1: {tt[1]}</p>
-              <p>0: {tt[0]}</p>
-              <p>
-                Average: {(t/c).toFixed(2)} Total Passes: {c}
-              </p>
-            </div>
-            <Graph my_data={user.sessions}/>
-          </div>
+        <div className="stats-header">
+          <h1 className="stats-title">STATS</h1>
+          <button onClick={toggleVisibility} className="toggle-button">
+            {isVisible ? "Hide Lifetime Stats & Graph" : "Show Lifetime Stats & Graph"}
+          </button>
         </div>
-      );
-    })}
+              
+
+      
+      <div className='specialcontainer'>
+      {listCurrUsers.map((user, index) => {
+
+let tt = findtotalobject(user);
+let t = findtotal(user);
+let c = findcount(user);
+
+// Function to toggle visibility
+
+
+return (
+  <div className="stats-user" key={index}> {/* No conditional class needed */}
+    <h2>{user.username}</h2>
+    <div className="stats-sections">
+      {/* Current Session Section */}
+      <div className="stats-section">
+        <h3>Current Session</h3>
+        <p>3: {user.currentSession.passes[3]}</p>
+        <p>2: {user.currentSession.passes[2]}</p>
+        <p>1: {user.currentSession.passes[1]}</p>
+        <p>0.5: {user.currentSession.passes[0.5]}</p> {/* Use '0.5' here */}
+        <p>0: {user.currentSession.passes[0]}</p>
+        <p>
+          Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.count}
+        </p>
+      </div>
+
+      {/* Lifetime Stats Section, always side by side */}
+      <div className={`stats-section lifetime-section ${isVisible ? 'visible' : 'hidden-content'}`}>
+        <h3>Lifetime</h3>
+        <p>3: {tt[3]}</p>
+        <p>2: {tt[2]}</p>
+        <p>1: {tt[1]}</p>
+        <p>0.5: {tt['0.5']}</p> {/* Ensure '0.5' is used here */}
+        <p>0: {tt[0]}</p>
+        <p>
+          Average: {(t/c).toFixed(2)} Total Passes: {c}
+        </p>
+
+        {/* Graph Component */}
+        <Graph my_data={user.sessions} />
+      </div>
+    </div>
+
+    {/* Toggle button for hiding only content, not the section */}
+    
+  </div>
+);
+})}
+      </div>
+      
 
     </div> 
     

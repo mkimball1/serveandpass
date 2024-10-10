@@ -4,6 +4,7 @@ function Session(curr_date) {
             "3": 0,
             "2": 0,
             "1": 0,
+            0.5: 0,
             "0": 0,
           }
     this.count = 0

@@ -71,8 +71,10 @@
   
   .score-button {
     background-color: #007bff;
+    /* width: 10%; */
+    margin: 5px;
     color: white;
-    padding: 15px 20px; /* Increased padding */
+    padding: 15px 15px;
     font-size: 18px; /* Increased font size */
     border: none;
     border-radius: 4px;
@@ -135,6 +137,8 @@
   margin: 0 auto;
   /* padding: 10px; */
   /* border: 1px solid #ccc; */
+  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
 }
 
 /* Ensure stats-user div is responsive */
@@ -146,6 +150,8 @@
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
 }
 
 /* Make the graph container responsive */
@@ -161,12 +167,16 @@
     justify-content: space-between;
     flex-wrap: wrap; /* Allows wrapping on smaller screens */
     gap: 20px; /* Adds spacing between the sections */
+    word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
   }
   
   /* Flex properties for the sections */
   .stats-section {
     flex: 1 1 calc(50% - 10px); /* Take 50% width minus spacing */
     min-width: 200px; /* Ensures it doesn't shrink too much */
+    word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
   }
   
   /* Graph container takes full width */
@@ -179,13 +189,106 @@
   /* Optional: Center the headings */
   .stats-section h3 {
     text-align: center;
+    word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
   }
   
   /* Adjust paragraphs */
   .stats-section p {
+    display: flex;
     margin: 5px 0;
+    word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
   }
 
+  /* Default container styles */
+.stats-user {
+  width: 20%;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
+}
 
-  
-  
+/* Stats sections container */
+.stats-sections {
+  display: flex; /* Flexbox to align side by side */
+  justify-content: space-between; /* Spread the sections */
+  align-items: flex-start;
+  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
+}
+
+/* Section for current session and lifetime stats */
+.stats-section {
+  width: 45%; /* Each section takes 45% of the width */
+  transition: all 0.3s ease;
+  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
+}
+
+/* Lifetime section when content is visible */
+.lifetime-section.visible {
+  opacity: 1; /* Full opacity when visible */
+  height: auto;
+}
+
+/* Lifetime section when content is hidden */
+.lifetime-section.hidden-content {
+  opacity: 0; /* Hidden content */
+  height: 0; /* Shrink height */
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+/* Button style */
+.toggle-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}
+
+.specialcontainer {
+  display: flex;
+  flex-wrap: wrap; /* Allow content to wrap to a new row */
+  justify-content: space-around; /* Distribute space evenly between items */
+}
+
+
+.stats-header {
+  display: flex; /* Use flexbox to align items side by side */
+  align-items: center; /* Vertically align the button and title */
+  justify-content: flex-start; /* Align them to the start (left) */
+  margin-bottom: 50px;
+  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  overflow-wrap: break-word;
+}
+
+.stats-title {
+  margin-right: 10px; /* Add some space between the title and button */
+}
+
+.toggle-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}
