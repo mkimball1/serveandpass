@@ -236,7 +236,7 @@ function App() {
               
 
       
-      <div className='specialcontainer'>
+      <div className='user-list'>
       {listCurrUsers.map((user, index) => {
 
 let tt = findtotalobject(user);
