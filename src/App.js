@@ -121,7 +121,14 @@ function App() {
 
   function initAll(event) {
     event.preventDefault();
+    
     const foundUser = listUsers.find(user => user['username'] === username);
+
+    const foundCurrUser = listCurrUsers.find(user => user['username'] === username);
+    if (foundCurrUser) {
+      console.log(`User already exists: ${foundCurrUser.username}`);
+      return;
+    }
   
     if (foundUser) {
       toast("Loading User: " + username, {
@@ -247,7 +254,7 @@ let c = findcount(user);
 
 
 return (
-  <div className="stats-user" key={index}> {/* No conditional class needed */}
+  <div className="user-container" key={index}> {/* No conditional class needed */}
     <h2>{user.username}</h2>
     <div className="stats-sections">
       {/* Current Session Section */}
@@ -258,9 +265,8 @@ return (
         <p>1: {user.currentSession.passes[1]}</p>
         <p>0.5: {user.currentSession.passes[0.5]}</p> {/* Use '0.5' here */}
         <p>0: {user.currentSession.passes[0]}</p>
-        <p>
-          Average: {user.currentSession.average.toFixed(2)} Total Passes: {user.currentSession.count}
-        </p>
+        <p> Average: {user.currentSession.average.toFixed(2)} </p>
+        <p> Total Passes: {user.currentSession.count} </p>
       </div>
 
       {/* Lifetime Stats Section, always side by side */}
@@ -271,9 +277,8 @@ return (
         <p>1: {tt[1]}</p>
         <p>0.5: {tt['0.5']}</p> {/* Ensure '0.5' is used here */}
         <p>0: {tt[0]}</p>
-        <p>
-          Average: {(t/c).toFixed(2)} Total Passes: {c}
-        </p>
+        <p> Average: {(t/c).toFixed(2)} </p>
+        <p>Total Passes: {c} </p>
 
         {/* Graph Component */}
         <Graph my_data={user.sessions} />
