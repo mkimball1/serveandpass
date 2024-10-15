@@ -164,10 +164,7 @@
   
   /* Flex properties for the sections */
   .stats-section {
-    flex: 1 1 calc(50% - 10px); /* Take 50% width minus spacing */
-    min-width: 200px; /* Ensures it doesn't shrink too much */
-    word-wrap: break-word; /* Ensure long words break and wrap inside container */
-    overflow-wrap: break-word;
+    width: 100%;
   }
   
   /* Graph container takes full width */
@@ -193,23 +190,6 @@
   padding: 15px;
   margin-bottom: 20px;
   transition: all 0.3s ease-in-out;
-  word-wrap: break-word; /* Ensure long words break and wrap inside container */
-  overflow-wrap: break-word;
-}
-
-/* Stats sections container */
-.stats-sections {
-  display: flex; /* Flexbox to align side by side */
-  justify-content: space-between; /* Spread the sections */
-  align-items: flex-start;
-  word-wrap: break-word; /* Ensure long words break and wrap inside container */
-  overflow-wrap: break-word;
-}
-
-/* Section for current session and lifetime stats */
-.stats-section {
-  width: 45%; /* Each section takes 45% of the width */
-  transition: all 0.3s ease;
   word-wrap: break-word; /* Ensure long words break and wrap inside container */
   overflow-wrap: break-word;
 }
