@@ -1,217 +1,214 @@
 /* General Layout */
 .container {
-    width: 100vw;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Form Styling */
-  .form-container {
-    display: flex;
-    width: 100vw;
-    justify-content: center;
-    margin: 0px;
-    margin-bottom: 20px;
-  }
-  
-  .input-container {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .input-field {
-    padding: 15px;
-    font-size: 20px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 70%;
-  }
-  
-  .submit-button {
-    background-color: #28a745;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #218838;
-  }
-  
-  /* User List Styling */
-  .user-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-  }
-  
-  .user-container {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 15vw;
-    text-align: center; /* Center content */
-  }
-  
-  .user-title {
-    margin-top: 0px;
-    font-size: 18px; /* Make the title larger */
-    font-weight: bold;
-  }
-  
-  /* Buttons for 3, 2, 1, 0 */
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .score-button {
-    background-color: #007bff;
-    /* width: 10%; */
-    /* margin: 5px; */
-    color: white;
-    padding: 5%;
-    margin: 2px;
-    font-size: 150%; /* Increased font size */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .score-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Undo button styling */
-  .undo-container {
-    margin-top: 10px;
-  }
-  
-  .undo-button {
-    background-color: #dc3545;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%; /* Takes up full width in its row */
-  }
-  
-  .undo-button:hover {
-    background-color: #c82333;
-  }
-  
+  width: 100vw;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Form Styling */
+.form-container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  margin: 0%;
+  margin-bottom: 2%;
+}
+
+.input-container {
+  display: flex;
+  gap: 1%;
+}
+
+.input-field {
+  padding: 2%;
+  font-size: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 70%;
+}
+
+.submit-button {
+  background-color: #28a745;
+  color: white;
+  padding: 2% 4%;
+  font-size: 100%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
+
+/* User List Styling */
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3%;
+  justify-content: center;
+}
+
+.user-container {
+  border: 1px solid #ccc;
+  padding: 2%;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  box-shadow: 0 4% 8% rgba(0, 0, 0, 0.1);
+  width: 15vw;
+  text-align: center;
+}
+
+.user-title {
+  margin-top: 0%;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+/* Buttons for 3, 2, 1, 0 */
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+}
+
+.score-button {
+  background-color: #007bff;
+  color: white;
+  padding: 4%;
+  /* margin: 0.2%; */
+  font-size: 75%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.score-button:hover {
+  background-color: #0056b3;
+}
+
+/* Undo button styling */
+.undo-container {
+  margin-top: 1%;
+}
+
+.undo-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 2% 4%;
+  font-size: 100%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.undo-button:hover {
+  background-color: #c82333;
+}
+
 /* Submit All button styling */
 .submit-all-button {
-    background-color: #218838;
-    color: white;
-    padding: 20px 40px; /* Increased padding to make it bigger */
-    font-size: 24px; /* Increased font size */
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    display: block;  /* Makes it a block-level element */
-    margin: 20px auto; /* Center the button horizontally and add spacing */
-    margin-bottom: 200px;
-    margin-top: 100px;
-    text-align: center; /* Center text inside button */
-  }
-  
-  .submit-all-button:hover {
-    background-color: #1e7e34;
-  }
-  
+  background-color: #218838;
+  color: white;
+  padding: 2% 4%;
+  font-size: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  margin: 2% auto;
+  margin-bottom: 20%;
+  margin-top: 10%;
+  text-align: center;
+}
 
-  /* Stats Section */
-  .stats-title {
-    text-align: center;
-    margin-top: 40px;
-  }
-  
-  /* Container styling */
+.submit-all-button:hover {
+  background-color: #1e7e34;
+}
+
+/* Stats Section */
+.stats-title {
+  text-align: center;
+  margin-top: 4%;
+}
+
+/* Container styling */
 .stats-container {
-  width: 100%; 
+  width: 100%;
   margin: 0 auto;
 }
 
 /* Ensure stats-user div is responsive */
 .stats-user {
-  width: 100%; /* Use full width */
-  margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 2%;
   border: 1px solid #ccc;
-  /* margin: auto; */
-  padding: 10px;
+  padding: 1%;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  box-shadow: 0 4% 8% rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 /* Make the graph container responsive */
 .mygraph {
-  width: 100%; /* Make sure graph takes up full width of parent */
-  max-width: 100%; /* Ensure it doesn’t exceed the parent container */
-  overflow: hidden; /* Prevent the graph from overflowing */
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-  
-  /* Flex properties for the sections */
-  .stats-section {
-    width: 100%;
-  }
-  
-  /* Graph container takes full width */
-  .mygraph {
-    flex: 1 1 100%; /* The graph will take full width in mobile layout */
-    height: 25vh;
-    margin-top: 20px; /* Add space between graph and sections */
-  }
-  
-  /* Adjust paragraphs */
-  .stats-section p {
-    font-size: 12px; /* Example: Adjust font size */
-    margin: 10px 0; /* Example: Set margin */
-    word-wrap: break-word; /* Ensure long words break and wrap inside container */
-    overflow-wrap: break-word;
-    display: flex;
-  }
+/* Flex properties for the sections */
+.stats-section {
+  width: 100%;
+}
 
-  /* Default container styles */
+/* Graph container takes full width */
+.mygraph {
+  flex: 1 1 100%;
+  height: 25vh;
+  margin-top: 2%;
+}
+
+/* Adjust paragraphs */
+.stats-section p {
+  font-size: 100%;
+  margin: 1% 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: flex;
+}
+
+/* Default container styles */
 .stats-user {
   width: 20%;
   border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 1.5%;
+  margin-bottom: 2%;
   transition: all 0.3s ease-in-out;
-  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 /* Lifetime section when content is visible */
 .lifetime-section.visible {
-  opacity: 1; /* Full opacity when visible */
+  opacity: 1;
   height: auto;
 }
 
 /* Lifetime section when content is hidden */
 .lifetime-section.hidden-content {
-  opacity: 0; /* Hidden content */
-  height: 0; /* Shrink height */
+  opacity: 0;
+  height: 0;
   overflow: hidden;
   transition: opacity 0.3s ease, height 0.3s ease;
 }
 
 /* Button style */
 .toggle-button {
-  margin-top: 10px;
-  padding: 5px 10px;
+  margin-top: 1%;
+  padding: 0.5% 1%;
   background-color: #007bff;
   color: white;
   border: none;
@@ -226,27 +223,26 @@
 
 .specialcontainer {
   display: flex;
-  flex-wrap: wrap; /* Allow content to wrap to a new row */
-  justify-content: space-around; /* Distribute space evenly between items */
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-
 .stats-header {
-  display: flex; /* Use flexbox to align items side by side */
-  align-items: center; /* Vertically align the button and title */
-  justify-content: flex-start; /* Align them to the start (left) */
-  margin-bottom: 50px;
-  margin-left: 50px;/* margin: auto; */
-  word-wrap: break-word; /* Ensure long words break and wrap inside container */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .stats-title {
-  margin-right: 10px; /* Add some space between the title and button */
+  margin-right: 1%;
 }
 
 .toggle-button {
-  padding: 5px 10px;
+  padding: 0.5% 1%;
   background-color: #007bff;
   color: white;
   border: none;
