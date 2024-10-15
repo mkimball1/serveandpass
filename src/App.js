@@ -234,7 +234,7 @@ function App() {
         }}>
           Submit All
         </button>
-        <div className="stats-header">
+        <div className="form-container">
           <h1 className="stats-title">STATS</h1>
           <button onClick={toggleVisibility} className="toggle-button">
             {isVisible ? "Hide Lifetime Stats & Graph" : "Show Lifetime Stats & Graph"}
@@ -255,11 +255,10 @@ let c = findcount(user);
 
 return (
   <div className="user-container" key={index}> {/* No conditional class needed */}
-    <h2>{user.username}</h2>
-    <div className="stats-sections">
+    <h2 className='user-title'>{user.username}</h2>
+    <div className="">
       {/* Current Session Section */}
       <div className="stats-section">
-        <h3>Current Session</h3>
         <p>3: {user.currentSession.passes[3]}</p>
         <p>2: {user.currentSession.passes[2]}</p>
         <p>1: {user.currentSession.passes[1]}</p>
@@ -271,7 +270,7 @@ return (
 
       {/* Lifetime Stats Section, always side by side */}
       <div className={`stats-section lifetime-section ${isVisible ? 'visible' : 'hidden-content'}`}>
-        <h3>Lifetime</h3>
+        <h3 className='user-title'>Lifetime</h3>
         <p>3: {tt[3]}</p>
         <p>2: {tt[2]}</p>
         <p>1: {tt[1]}</p>
