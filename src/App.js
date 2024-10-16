@@ -225,6 +225,7 @@ function App() {
   </div>
 
   
+
     
     {listCurrUsers.length !== 0? 
     <div className="stats-container">
@@ -234,6 +235,7 @@ function App() {
         }}>
           Submit All
         </button>
+        <hr style={{ border: "1px solid black" }} />
         <div className="form-container">
           <h1 className="stats-title">STATS</h1>
           <button onClick={toggleVisibility} className="toggle-button">

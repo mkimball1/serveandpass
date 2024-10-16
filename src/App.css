@@ -21,7 +21,7 @@
 
 .input-field {
   padding: 2%;
-  font-size: 100%;
+  font-size: 2vh;
   border-radius: 4px;
   border: 1px solid #ccc;
   width: 70%;
@@ -31,7 +31,7 @@
   background-color: #28a745;
   color: white;
   padding: 2% 4%;
-  font-size: 100%;
+  font-size: 2vh;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -55,13 +55,13 @@
   border-radius: 10px;
   margin-bottom: 2%;
   box-shadow: 0 4% 8% rgba(0, 0, 0, 0.1);
-  width: 15vw;
+  width: 13vw;
   text-align: center;
 }
 
 .user-title {
   margin-top: 0%;
-  font-size: 100%;
+  font-size: 2vh;
   font-weight: bold;
 }
 
@@ -77,8 +77,9 @@
   background-color: #007bff;
   color: white;
   padding: 4%;
-  /* margin: 0.2%; */
-  font-size: 75%;
+  width: 2.5vw;
+  height: 5vh;
+  font-size: 2vh;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -97,11 +98,12 @@
   background-color: #dc3545;
   color: white;
   padding: 2% 4%;
-  font-size: 100%;
+  font-size: 2vh;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  height: 4vh;
 }
 
 .undo-button:hover {
@@ -113,14 +115,14 @@
   background-color: #218838;
   color: white;
   padding: 2% 4%;
-  font-size: 100%;
+  font-size: 2vh;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   display: block;
   margin: 2% auto;
-  margin-bottom: 20%;
-  margin-top: 10%;
+  margin-bottom: 5vh;
+  margin-top: 5vh;
   text-align: center;
 }
 
@@ -132,6 +134,7 @@
 .stats-title {
   text-align: center;
   margin-top: 4%;
+  font-size: 5vh;
 }
 
 /* Container styling */
@@ -152,12 +155,6 @@
   overflow-wrap: break-word;
 }
 
-/* Make the graph container responsive */
-.mygraph {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-}
 
 /* Flex properties for the sections */
 .stats-section {
@@ -167,13 +164,13 @@
 /* Graph container takes full width */
 .mygraph {
   flex: 1 1 100%;
-  height: 25vh;
+  height: 30vh;
   margin-top: 2%;
 }
 
 /* Adjust paragraphs */
 .stats-section p {
-  font-size: 100%;
+  font-size: 2vh;
   margin: 1% 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -215,6 +212,8 @@
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 3vw;
+  height: 10vh;
 }
 
 .toggle-button:hover {
