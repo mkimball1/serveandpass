@@ -75,6 +75,11 @@ function App() {
   }
 
   const incrementPass = (user, passKey) => {
+    if(passKey == '.5'){ 
+      passKey = '0.5'
+      console.log("rizz")
+    } 
+    
     // Clone the current session
     const updatedSession = { ...user.currentSession }; 
     updatedSession.passes = {
@@ -164,7 +169,6 @@ function App() {
       // Handle 0.5 separately
       total['0.5'] += user.sessions[i].passes[0.5];  // Use 0.5 key correctly
     }
-    
     return total;
 }
 
@@ -212,7 +216,7 @@ function App() {
         <div className="user-container" key={index}>
           <h1 className="user-title">{user.username}</h1>
           <div className="button-container">
-            {[3, 2, 1, 0.5, 0].map((value) => (
+            {[3, 2, 1, '.5', 0].map((value) => (
               <button key={value} className="score-button" onClick={() => incrementPass(user, value)}>{value}</button>
             ))}
           </div>
@@ -223,9 +227,6 @@ function App() {
       );
     })}
   </div>
-
-  
-
     
     {listCurrUsers.length !== 0? 
     <div className="stats-container">
@@ -264,7 +265,7 @@ return (
         <p>3: {user.currentSession.passes[3]}</p>
         <p>2: {user.currentSession.passes[2]}</p>
         <p>1: {user.currentSession.passes[1]}</p>
-        <p>0.5: {user.currentSession.passes[0.5]}</p> {/* Use '0.5' here */}
+        <p>.5: {user.currentSession.passes[0.5]}</p> {/* Use '0.5' here */}
         <p>0: {user.currentSession.passes[0]}</p>
         <p> Average: {user.currentSession.average.toFixed(2)} </p>
         <p> Total Passes: {user.currentSession.count} </p>
@@ -276,7 +277,7 @@ return (
         <p>3: {tt[3]}</p>
         <p>2: {tt[2]}</p>
         <p>1: {tt[1]}</p>
-        <p>0.5: {tt['0.5']}</p> {/* Ensure '0.5' is used here */}
+        <p>.5: {tt['0.5']}</p> {/* Ensure '0.5' is used here */}
         <p>0: {tt[0]}</p>
         <p> Average: {(t/c).toFixed(2)} </p>
         <p>Total Passes: {c} </p>
