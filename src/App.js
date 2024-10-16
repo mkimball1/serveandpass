@@ -76,7 +76,7 @@ function App() {
 
   const incrementPass = (user, passKey) => {
     if(passKey == '.5'){ 
-      passKey = '0.5'
+      passKey = 0.5
       console.log("rizz")
     } 
     
@@ -157,7 +157,7 @@ function App() {
       3: 0,
       2: 0,
       1: 0,
-      '0.5': 0,  // Use '0.5' as a string
+      0.5: 0,  // Use '0.5' as a string
       0: 0
     };
     
@@ -175,10 +175,12 @@ function App() {
 
   
   function findtotal(user){
+    console.log(user)
     let total = 0;
     for (let i = 0; i < user.sessions.length; i++) {
       total += user.sessions[i].total
     }
+    
     return total
   }
 
@@ -252,7 +254,9 @@ function App() {
 let tt = findtotalobject(user);
 let t = findtotal(user);
 let c = findcount(user);
-
+console.log(tt);
+console.log(t);
+console.log(c);
 // Function to toggle visibility
 
 
@@ -273,6 +277,7 @@ return (
 
       {/* Lifetime Stats Section, always side by side */}
       <div className={`stats-section lifetime-section ${isVisible ? 'visible' : 'hidden-content'}`}>
+        
         <h3 className='user-title'>Lifetime</h3>
         <p>3: {tt[3]}</p>
         <p>2: {tt[2]}</p>
